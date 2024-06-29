@@ -1,4 +1,8 @@
-from tkinter import Canvas
+import typing
+if typing.TYPE_CHECKING:
+    from tkinter import Canvas
+    from src.window import Window
+
 
 class Point:
     def __init__(self, x: int, y: int) -> None:
@@ -14,7 +18,7 @@ class Line:
         canvas.create_line(self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=fill_color, width=2)
 
 class Cell:
-    def __init__(self, x1: int, y1: int, x2: int, y2: int, window: 'Window') -> None:
+    def __init__(self, x1: int, y1: int, x2: int, y2: int, window: Window) -> None:
         self.has_left_wall: bool = True
         self.has_right_wall: bool = True
         self.has_top_wall: bool = True
@@ -34,3 +38,8 @@ class Cell:
             self._win.draw_line(Line(Point(self._x1, self._y1), Point(self._x2, self._y1)), 'black')
         if self.has_bottom_wall:
             self._win.draw_line(Line(Point(self._x1, self._y2), Point(self._x2, self._y2)), 'black')
+
+    def draw_move(self, to_cell: 'Cell', undo: bool = False):
+        self_center: Point = Point((self._x1+self._x2)/2, (self._y1+self._y2)/2)
+        other_center: Point = Point((to_cell._x1+to_cell._x2)/2, (to_cell._y1+to_cell._y2)/2)
+        self._win.draw_line(Line(self_center, other_center, 'gray' if undo else 'red'))

@@ -1,6 +1,3 @@
-import sys
-sys.path.append('.')
-
 from src.shapes import Line
 
 from tkinter import Tk, BOTH, Canvas
