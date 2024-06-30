@@ -7,7 +7,7 @@ from src.maze import Maze
 
 def main() -> None:
     win: Window = Window(800, 600)
-    maze: Maze = Maze(10, 10, 40, 30, 10, 10, win)
+    maze: Maze = Maze(10, 10, 40, 30, 18, 18, win)
     maze._break_entrance_and_exit()
     maze._break_walls_r()
     maze._reset_cells_visited()
