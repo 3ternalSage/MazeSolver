@@ -28,6 +28,7 @@ class Cell:
         self._x2: int = x2
         self._y2: int = y2
         self._win: Window = window
+        self.visited: bool = False
 
     def draw(self) -> None:
         if self._win:
@@ -40,4 +41,4 @@ class Cell:
         if self._win:
             self_center: Point = Point((self._x1+self._x2)/2, (self._y1+self._y2)/2)
             other_center: Point = Point((to_cell._x1+to_cell._x2)/2, (to_cell._y1+to_cell._y2)/2)
-            self._win.draw_line(Line(self_center, other_center, 'gray' if undo else 'red'))
+            self._win.draw_line(Line(self_center, other_center), 'gray' if undo else 'red')
